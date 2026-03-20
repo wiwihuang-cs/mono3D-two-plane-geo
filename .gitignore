@@ -11,3 +11,6 @@ wheels/
 
 # MacOS system files
 .DS_Store
+
+# Data files
+libs/dataset/cityscape
