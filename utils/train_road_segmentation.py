@@ -23,14 +23,14 @@ def main():
     print(f"Using device: {device}")
 
     # Dataset
-    train_dataset = CityscapeDataset("data/train/images", "data/train/labels")
-    val_dataset = CityscapeDataset("data/val/images", "data/val/labels")
+    train_dataset = CityscapeDataset("libs/dataset/cityscape/leftImg8bit/train", "libs/dataset/cityscape/gtFine/train")
+    val_dataset = CityscapeDataset("libs/dataset/cityscape/leftImg8bit/val", "libs/dataset/cityscape/gtFine/val")
 
     train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
     val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE)
 
     # Model
-    model = build_model().to(device)
+    model = build_model(device)
 
     # Loss function and optimizer
     loss_fn = nn.BCEWithLogitsLoss()  # The output of the model is between [-inf, +inf], so we use BCEWithLogitsLoss which combines a sigmoid layer([0, 1]) and the BCELoss.

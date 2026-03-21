@@ -1,4 +1,3 @@
-from libs.metric import iou
 import torch
 from libs.metric.iou import compute_iou
 from libs.visualization.loss_visualization import plot_loss

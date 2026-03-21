@@ -10,4 +10,5 @@ def plot_loss(losses, save_path):
     plt.plot(batches, losses, "bo")
 
     plt.savefig(save_path)
-    plt.show()
+    # plt.show()
+    plt.close()
