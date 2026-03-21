@@ -1,0 +1,19 @@
+model:
+  device: "cuda"
+  model_path: "models/road_segmentation_best.pth"
+
+input:
+  image_path: "test.png"
+  resize_size:
+    - 512
+    - 1024
+
+road_segmentation:
+  threshold: 0.5
+
+lane_segmentation:
+  min_slope: 0.3
+
+visualization:
+  alpha: 0.4
+  save_path: "outputs/result.png"
