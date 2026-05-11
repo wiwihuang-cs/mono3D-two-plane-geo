@@ -1,5 +1,5 @@
 from libs.inference.road_segmentation  import predict_road, apply_road_mask
-from libs.inference.lane_segmentation  import detect_lines_with_elsed, split_left_right_lines
+from libs.inference.lane_segmentation_up_hile  import detect_lines_with_elsed, split_left_right_lines
 from libs.inference.lane_fitting       import collect_points_from_segments, piecewise_linear_fit, compute_lane_widths
 from libs.inference.pitch_estimation   import estimate_pitch_from_widths
 

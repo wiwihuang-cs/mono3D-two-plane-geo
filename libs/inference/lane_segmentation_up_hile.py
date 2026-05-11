@@ -5,7 +5,7 @@ import numpy as np
 # from sklearn.cluster import KMeans
 # from sklearn.preprocessing import StandardScaler
 
-def detect_lines_with_elsed(masked_road, min_length_near=45, min_length_far=12):
+def detect_lines_with_elsed(masked_road, min_length_near, min_length_far):
     """
     Detect line segments with a y-adaptive length threshold.
 

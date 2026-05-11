@@ -28,7 +28,7 @@ import pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent))
 
 from libs.inference.road_segmentation import load_pidnet, apply_road_mask
-from libs.inference.lane_segmentation import detect_lines_with_elsed, split_left_right_lines
+from libs.inference.lane_segmentation_up_hile import detect_lines_with_elsed, split_left_right_lines
 from libs.inference.lane_fitting import (
     collect_points_from_segments,
     piecewise_linear_fit,
@@ -134,7 +134,8 @@ def run_pipeline(
 
     resize_size = tuple(cfg["input"]["resize_size"])          # (512, 1024)
     min_slope   = cfg["lane_segmentation"]["min_slope"]
-    min_len     = cfg["lane_segmentation"]["min_segment_length"]
+    min_len_near = cfg["lane_segmentation"]["min_segment_length_near"]
+    min_len_far  = cfg["lane_segmentation"]["min_segment_length_far"]
     tolerance   = cfg["lane_segmentation"]["lane_band_tolerance"]
     extra_pts   = cfg["lane_fitting"]["extra_points_per_segment"]
     num_bands   = cfg["lane_fitting"]["num_bands"]
@@ -147,10 +148,10 @@ def run_pipeline(
     resized_image, pred_mask = predict_road_from_pil(
         model, pil_image, device, resize_size
     )
-    masked_road = apply_road_mask(resized_image, pred_mask)
+    masked_road, _ = apply_road_mask(resized_image, pred_mask)
 
     # 階段 2：車道線偵測（ELSED）
-    segments = detect_lines_with_elsed(masked_road, min_len)
+    segments = detect_lines_with_elsed(masked_road, min_len_near, min_len_far)
 
     # 階段 3：左右車道分類
     inner_left, inner_right = split_left_right_lines(

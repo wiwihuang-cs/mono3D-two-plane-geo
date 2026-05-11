@@ -2,7 +2,7 @@ import time
 import yaml
 # from libs.model.resnet101 import build_inference_model
 from libs.inference.road_segmentation import load_pidnet, predict_road, apply_road_mask
-from libs.inference.lane_segmentation import detect_lines_with_elsed, split_left_right_lines
+from libs.inference.lane_segmentation_up_hile import detect_lines_with_elsed, split_left_right_lines
 from libs.visualization.lane_visualization import draw_lane_lines, create_overlay, draw_line_segments
 # from libs.inference.lane_segmentation import cluster_left_right, get_best_seed
 # from libs.visualization.lane_visualization import draw_kmeans_clusters, draw_lane_seed
