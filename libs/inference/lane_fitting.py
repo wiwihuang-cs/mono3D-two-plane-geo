@@ -88,4 +88,8 @@ def compute_lane_widths(left_fits, right_fits, num_samples):
         if x_left is not None and x_right is not None:
             widths.append((y, x_right - x_left))
 
-    return np.array(widths)
+    # Always return shape (N, 2) so callers can safely do widths[:, 0] / widths[:, 1].
+    # np.array([]) produces shape (0,) which causes IndexError downstream.
+    if not widths:
+        return np.empty((0, 2))
+    return np.array(widths)  # shape (N, 2)
